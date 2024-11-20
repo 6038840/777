@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实时滚动时间</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+        }
+        .time-container {
+            display: flex;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+        }
+        .time-segment {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .time-segment span {
+            display: block;
+        }
+        /* 动态调整字体大小 */
+        .time-container {
+            font-size: 20vw;  /* 基于视口宽度调整字体大小 */
+        }
+    </style>
+</head>
+<body>
+
+<div class="time-container">
+    <div class="time-segment" id="hour">
+        <span>00</span>
+    </div>
+    <div class="time-segment">:</div>
+    <div class="time-segment" id="minute">
+        <span>00</span>
+    </div>
+    <div class="time-segment">:</div>
+    <div class="time-segment" id="second">
+        <span>00</span>
+    </div>
+</div>
+
+<script>
+    function updateTime() {
+        const now = new Date(); // 获取当前时间
+        let hours = now.getHours().toString().padStart(2, '0');  // 补充0
+        let minutes = now.getMinutes().toString().padStart(2, '0');  // 补充0
+        let seconds = now.getSeconds().toString().padStart(2, '0');  // 补充0
+
+        // 更新页面显示的时间
+        document.getElementById('hour').querySelector('span').textContent = hours;
+        document.getElementById('minute').querySelector('span').textContent = minutes;
+        document.getElementById('second').querySelector('span').textContent = seconds;
+    }
+
+    // 每秒更新一次时间
+    setInterval(updateTime, 1000);
+
+    // 页面加载时先执行一次更新
+    updateTime();
+</script>
+
+</body>
+</html>
